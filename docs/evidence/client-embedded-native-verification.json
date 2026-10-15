@@ -1,0 +1,43 @@
+{
+  "platform": "actual Linux Tauri/WebKitGTK / niri Wayland",
+  "enabled": {
+    "config": {
+      "pack_id": "11111111-1111-4111-8111-111111111111",
+      "pack_name": "蒹葭服务器整合包",
+      "server_url": "https://example.invalid",
+      "game_dir": ".minecraft",
+      "launcher_path": "HMCL.exe"
+    },
+    "checked": "true",
+    "color": "rgb(97, 213, 162)",
+    "text": "系统托盘 · 后台常驻",
+    "page": "WORKSPACE SETTINGS配置与说明蒹葭服务器专用更新器，文件路径相对更新器所在目录。当前整合包整合包名称蒹葭服务器整合包整合包 ID11111111-1111-4111-8111-111111111111更新服务https://example.invalid游戏实例.minecraft启动器HMCL.exe后台运行已开启：关闭窗口后隐藏到系统托盘，更新继续进行。 更新完成后发送系统通知；安装和保存版本期间不可退出。设置自动保存在本整合包中。 ",
+    "errors": [],
+    "tauri": true,
+    "assets": [
+      "tauri://localhost/assets/index-BWht-El5.js"
+    ]
+  },
+  "disabled": {
+    "config": {
+      "pack_id": "11111111-1111-4111-8111-111111111111",
+      "pack_name": "蒹葭服务器整合包",
+      "server_url": "https://example.invalid",
+      "game_dir": ".minecraft",
+      "launcher_path": "HMCL.exe"
+    },
+    "checked": "false",
+    "color": "rgb(241, 138, 144)",
+    "text": "关闭窗口时安全退出",
+    "page": "WORKSPACE SETTINGS配置与说明蒹葭服务器专用更新器，文件路径相对更新器所在目录。当前整合包整合包名称蒹葭服务器整合包整合包 ID11111111-1111-4111-8111-111111111111更新服务https://example.invalid游戏实例.minecraft启动器HMCL.exe后台运行已关闭：关闭窗口时安全退出，下载会停止并保留原任务供重试。 更新完成后发送系统通知；安装和保存版本期间不可退出。设置自动保存在本整合包中。 ",
+    "errors": [],
+    "tauri": true,
+    "assets": [
+      "tauri://localhost/assets/index-BWht-El5.js"
+    ]
+  },
+  "packLocalConfigIgnored": true,
+  "preferences": {
+    "background_enabled": false
+  }
+}

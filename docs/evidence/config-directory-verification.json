@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-15",
+  "platform": "linux-x86_64",
+  "checks": {
+    "archive_only_contains_config_yaml_template": true,
+    "default_config_directory_init_admin": true,
+    "default_config_directory_health": true,
+    "admin_dir_still_relative_to_working_directory": true,
+    "yaml_jwt_login": true,
+    "database_still_relative_to_working_directory": true
+  },
+  "local_migration": {
+    "contents_and_secret_preserved": true,
+    "permissions_preserved": "600"
+  },
+  "limits": [
+    "No production database accessed",
+    "Windows/macOS native runtime not tested"
+  ]
+}

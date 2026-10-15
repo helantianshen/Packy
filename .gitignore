@@ -1,0 +1,14 @@
+/target/
+/.idea/
+/.tools/
+/bin/
+/data/
+**/node_modules/
+**/dist/
+**/src-tauri/gen/
+
+/.env
+/config/server.yaml
+/.env.*.local
+
+/artifacts/

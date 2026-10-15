@@ -1,0 +1,79 @@
+{
+  "platform": "Linux niri Wayland, actual Tauri 2/WebKitGTK 4.1 window; compositor screenshots",
+  "root": "/tmp/packy-native-flash-apjr5u33",
+  "latest_assets_verified_before": {
+    "js": "index-538zqyJg.js",
+    "css": "index-B42pwRfF.css"
+  },
+  "final_assets": {
+    "js": "index-DrbC-B-H.js",
+    "css": "index-CbvBXiaq.css"
+  },
+  "final_injected_style": false,
+  "metric": "Mean RGB distance from background in fixed content ROI; diagnostic for nearly blank frames, not FPS benchmark",
+  "runs": {
+    "native-forward-before": {
+      "captured_frames": 100,
+      "seconds": 1.1878553140013537,
+      "near_blank_frames": [
+        24
+      ],
+      "minimum_content_ratio": 0.052897741527654106
+    },
+    "native-forward-layer": {
+      "captured_frames": 100,
+      "seconds": 1.1372739210019063,
+      "near_blank_frames": [
+        29,
+        30
+      ],
+      "minimum_content_ratio": 0.008613904248411028
+    },
+    "native-backward-layer": {
+      "captured_frames": 100,
+      "seconds": 1.1486475279998558,
+      "near_blank_frames": [
+        33,
+        34
+      ],
+      "minimum_content_ratio": 0.07388476750821543
+    },
+    "native-forward-opacity": {
+      "captured_frames": 100,
+      "seconds": 1.191253502998734,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.8280318384856059
+    },
+    "native-backward-opacity": {
+      "captured_frames": 100,
+      "seconds": 1.2085605689971999,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.8741169641275901
+    },
+    "native-final-forward-1": {
+      "captured_frames": 100,
+      "seconds": 1.138858498998161,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.845441665518802
+    },
+    "native-final-backward-1": {
+      "captured_frames": 100,
+      "seconds": 1.1567405390014756,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.8661425844664397
+    },
+    "native-final-forward-2": {
+      "captured_frames": 100,
+      "seconds": 1.1363144319984713,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.8527420846533776
+    },
+    "native-final-backward-2": {
+      "captured_frames": 100,
+      "seconds": 1.074578127998393,
+      "near_blank_frames": [],
+      "minimum_content_ratio": 0.8646815167555443
+    }
+  },
+  "clips": "100 captured compositor frames exported at 30 fps for slow playback; raw timing per run is separate"
+}

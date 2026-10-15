@@ -1,0 +1,303 @@
+{
+  "platform": "Linux Tauri debug custom-protocol / WebKitGTK / niri Wayland",
+  "root": "/tmp/packy-motion-native-hqliesp6",
+  "method": "compare compositor screenshots against both stable page references; main content sampled every 6 pixels; exclude navigation and footer",
+  "runs": {
+    "motion-forward-1": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-backward-1": {
+      "frames": 180,
+      "samples": 110,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-forward-2": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-backward-2": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-rapid-details": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 25,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-rapid-home": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 25,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-plan-forward": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-plan-backward": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 1,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-plan-rapid-details": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 25,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    },
+    "motion-plan-rapid-home": {
+      "frames": 180,
+      "samples": 112,
+      "clicks": 25,
+      "checks": {
+        "singlePage": true,
+        "opaque": true,
+        "noTransform": true,
+        "latestTargetSettled": true
+      },
+      "max_distance_from_nearest_stable_page": 0.0,
+      "unmatched_frames": [],
+      "old_page_returned_frames": [],
+      "page_positions": {
+        "home": [
+          [
+            262,
+            120
+          ]
+        ],
+        "details": [
+          [
+            262,
+            120
+          ]
+        ]
+      }
+    }
+  },
+  "assets": {
+    "js": "index-ClNO6d_y.js",
+    "css": "index-BFJvmnSp.css"
+  },
+  "motion_v": "2.7.0",
+  "screenshot_frames": 1800,
+  "native_raf_samples": 1118,
+  "rapid_clicks": 100,
+  "limits": [
+    "Linux native validation only; Windows not tested",
+    "Screenshots sample compositor output, not every display refresh",
+    "Pixel comparison samples the main content every 6 pixels; navigation color transitions and footer excluded",
+    "Videos retain every screenshot at 30fps slow playback; not measured runtime FPS",
+    "No actual mod downloads or installation performed in this navigation regression"
+  ],
+  "source_sha256": "82c580920e6eef42d2ae5f9853f7d666f34f057fbb25695bf0c2edd56bdd43e1"
+}

@@ -1,0 +1,17 @@
+{
+  "platform": "linux",
+  "target": "x86_64-unknown-linux-gnu",
+  "config": "config/client.linux.json",
+  "output": "artifacts/desktop/packy-desktop-linux-x86_64-unknown-linux-gnu.tar.gz",
+  "config_sha256": "dd9fe72d3db0630be723ed223e824703b0a16a2cbd9ce5a5adb87f5c70553fa2",
+  "binary_sha256": "7ae25e70096152c020c241c04770fc159dc985ca1704fb0f3e4b7a93ed35dde7",
+  "archive_sha256": "c39dc468235937a0e41e616317b01928918b0de56c1dcdd947f5a132df31e2f9",
+  "archive_bytes": 5101283,
+  "archive_members": [
+    "packy-desktop",
+    "build-info.json"
+  ],
+  "binary_mode": "0o755",
+  "embedded_linux_config_found": true,
+  "verification": "actual Linux native release build and archive inspection; Windows/macOS and remote CI not run"
+}

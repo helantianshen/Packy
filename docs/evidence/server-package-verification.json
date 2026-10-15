@@ -1,0 +1,18 @@
+{
+  "root": "/tmp/packy-server-package-9pbq80pw",
+  "platform": "Linux x86_64",
+  "archive": "artifacts/server/packy-server-linux-x86_64-unknown-linux-gnu.tar.gz",
+  "archive_sha256": "a459113c9ba2307097cf2fcc734d4cd60b55743facac1840b0f51e8627069a2a",
+  "archive_bytes": 5116208,
+  "binary_sha256_valid": true,
+  "admin_index_sha256_valid": true,
+  "no_production_secrets_or_data_in_archive": true,
+  "missing_jwt_rejected": true,
+  "init_admin": true,
+  "healthz": true,
+  "admin_page_and_asset": true,
+  "login": true,
+  "database_created_and_migrated": true,
+  "scope": "actual extracted release artifact with temporary database/environment; no production data touched",
+  "limits": "Windows/macOS and remote CI not run"
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "isolated-browser-real-App.vue-controlled-state-no-native-ipc",
+  "forward": {
+    "mutations": 0,
+    "frames": 181,
+    "heights": [
+      601.28125,
+      601.28125
+    ],
+    "footer": [
+      759.28125,
+      759.28125
+    ],
+    "widths": [
+      1265
+    ],
+    "pageCounts": [
+      2
+    ],
+    "minVisibleOpacity": 0.512842,
+    "noTransforms": true
+  },
+  "backward": {
+    "mutations": 0,
+    "frames": 181,
+    "heights": [
+      601.28125,
+      601.28125
+    ],
+    "footer": [
+      759.28125,
+      759.28125
+    ],
+    "widths": [
+      1265
+    ],
+    "pageCounts": [
+      2
+    ],
+    "minVisibleOpacity": 0.513079,
+    "noTransforms": true
+  },
+  "narrowRapid": {
+    "mutations": 0,
+    "frames": 181,
+    "heights": [
+      643.984375,
+      643.984375
+    ],
+    "footer": [
+      780.984375,
+      780.984375
+    ],
+    "widths": [
+      745
+    ],
+    "pageCounts": [
+      2
+    ],
+    "minVisibleOpacity": 0.513788,
+    "noTransforms": true
+  },
+  "reducedMotion": [
+    "0s",
+    "0s"
+  ],
+  "assertions": "passed"
+}

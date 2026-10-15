@@ -1,0 +1,90 @@
+{
+  "platform": "actual Linux Tauri/WebKitGTK window on niri Wayland",
+  "assets": {
+    "js": "index-C5LF-pwx.js",
+    "css": "index-BlV5D5ha.css"
+  },
+  "method": "fixed pixel regions containing only old-page content; detect any non-background content returning after first empty frame",
+  "runs": {
+    "native-final-forward-1": {
+      "frames": 100,
+      "roi": [
+        438,
+        230,
+        568,
+        265
+      ],
+      "first_empty_frame": 22,
+      "returned_frames": [
+        28,
+        29
+      ]
+    },
+    "native-final-backward-1": {
+      "frames": 100,
+      "roi": [
+        300,
+        610,
+        890,
+        765
+      ],
+      "first_empty_frame": 29,
+      "returned_frames": [
+        35,
+        36
+      ]
+    },
+    "native-no-ghost-forward-1": {
+      "frames": 100,
+      "roi": [
+        438,
+        230,
+        568,
+        265
+      ],
+      "first_empty_frame": 11,
+      "returned_frames": [],
+      "single_visible_page_samples": 40,
+      "inactive_page_always_zero_opacity": true
+    },
+    "native-no-ghost-backward-1": {
+      "frames": 100,
+      "roi": [
+        300,
+        610,
+        890,
+        765
+      ],
+      "first_empty_frame": 18,
+      "returned_frames": [],
+      "single_visible_page_samples": 41,
+      "inactive_page_always_zero_opacity": true
+    },
+    "native-no-ghost-forward-2": {
+      "frames": 100,
+      "roi": [
+        438,
+        230,
+        568,
+        265
+      ],
+      "first_empty_frame": 13,
+      "returned_frames": [],
+      "single_visible_page_samples": 41,
+      "inactive_page_always_zero_opacity": true
+    },
+    "native-no-ghost-backward-2": {
+      "frames": 100,
+      "roi": [
+        300,
+        610,
+        890,
+        765
+      ],
+      "first_empty_frame": 17,
+      "returned_frames": [],
+      "single_visible_page_samples": 41,
+      "inactive_page_always_zero_opacity": true
+    }
+  }
+}

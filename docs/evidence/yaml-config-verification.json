@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-15",
+  "platform": "linux-x86_64",
+  "checks": {
+    "package_contains_yaml_template_only": true,
+    "yaml_init_admin": true,
+    "yaml_only_health": true,
+    "packaged_admin_html": true,
+    "yaml_jwt_login": true,
+    "packaged_database_path": true
+  },
+  "limits": [
+    "Windows/macOS native builds and runtime not tested",
+    "No production database or real player files accessed"
+  ]
+}

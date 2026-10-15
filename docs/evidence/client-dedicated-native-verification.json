@@ -1,0 +1,39 @@
+{
+  "platform": "actual Linux Tauri/WebKitGTK on niri Wayland",
+  "root": "/tmp/packy-dedicated-native-mp050r63",
+  "default_background": "true",
+  "configured_name": "蒹葭服务器整合包",
+  "server_plan_name": "绿野旅途 · 联调整合包",
+  "assets": [
+    "tauri://localhost/assets/index-BlXjM2Fd.js"
+  ],
+  "config_unchanged_when_toggling": true,
+  "disabled_persisted": {
+    "background_enabled": false
+  },
+  "close_disabled": {
+    "mode": "exit",
+    "pid": 729448,
+    "checked": "false",
+    "processAlive": false,
+    "visibleWindows": 0,
+    "preference": {
+      "background_enabled": false
+    }
+  },
+  "close_enabled": {
+    "mode": "hide",
+    "pid": 731930,
+    "checked": "true",
+    "processAlive": true,
+    "visibleWindows": 0,
+    "preference": {
+      "background_enabled": true
+    }
+  },
+  "limits": [
+    "Close behavior tested while idle, no GUI installation/saving phase forced",
+    "Core update/download/cancel/retry covered by existing integration tests",
+    "Windows native behavior not tested"
+  ]
+}

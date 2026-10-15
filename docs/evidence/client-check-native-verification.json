@@ -1,0 +1,125 @@
+{
+  "platform": "Linux Tauri / WebKitGTK / niri Wayland",
+  "native_root": "/tmp/packy-check-flash-shgnu_0s",
+  "source_sha256": "55d9c79de76a4957487775d9a3d7e483a4c63be9a916d8225c79a52f9487d403",
+  "runs": {
+    "check-before": {
+      "samples": 138,
+      "frames": 180,
+      "assets": [
+        "tauri://localhost/assets/index-ClNO6d_y.js"
+      ],
+      "card_preserved": true,
+      "primary_preserved": false,
+      "launcher_preserved": false,
+      "child_list_mutations": 60,
+      "min_button_opacity": 0.5
+    },
+    "check-final-fast-1": {
+      "samples": 135,
+      "frames": 180,
+      "assets": [
+        "tauri://localhost/assets/index-DOl_b1pV.js"
+      ],
+      "card_preserved": true,
+      "primary_preserved": true,
+      "launcher_preserved": true,
+      "child_list_mutations": 0,
+      "buttons_always_opaque": true,
+      "button_positions": {
+        "primary": [
+          [
+            478,
+            488.09375,
+            100,
+            38
+          ]
+        ],
+        "": [
+          [
+            590,
+            488.09375,
+            112,
+            38
+          ]
+        ]
+      },
+      "loading_first_ms": null,
+      "disabled_samples": 2,
+      "max_main_content_pixel_distance": 0
+    },
+    "check-final-fast-2": {
+      "samples": 138,
+      "frames": 180,
+      "assets": [
+        "tauri://localhost/assets/index-DOl_b1pV.js"
+      ],
+      "card_preserved": true,
+      "primary_preserved": true,
+      "launcher_preserved": true,
+      "child_list_mutations": 0,
+      "buttons_always_opaque": true,
+      "button_positions": {
+        "primary": [
+          [
+            478,
+            488.09375,
+            100,
+            38
+          ]
+        ],
+        "": [
+          [
+            590,
+            488.09375,
+            112,
+            38
+          ]
+        ]
+      },
+      "loading_first_ms": null,
+      "disabled_samples": 0,
+      "max_main_content_pixel_distance": 0
+    },
+    "check-final-slow": {
+      "samples": 138,
+      "frames": 180,
+      "assets": [
+        "tauri://localhost/assets/index-DOl_b1pV.js"
+      ],
+      "card_preserved": true,
+      "primary_preserved": true,
+      "launcher_preserved": true,
+      "child_list_mutations": 8,
+      "buttons_always_opaque": true,
+      "button_positions": {
+        "primary": [
+          [
+            478,
+            488.09375,
+            100,
+            38
+          ]
+        ],
+        "": [
+          [
+            590,
+            488.09375,
+            112,
+            38
+          ]
+        ]
+      },
+      "loading_first_ms": 338,
+      "disabled_samples": 25
+    }
+  },
+  "limits": [
+    "Screenshots sample compositor output, not every display refresh",
+    "Pixel comparison samples a grid every 8 pixels in the main content",
+    "Slow case uses 400ms delay proxy forwarding the real local test backend",
+    "Only temporary modpack copies; no download, installation or game launch",
+    "Videos retain all captured images at 30fps slow playback; not runtime FPS",
+    "Windows not tested"
+  ]
+}

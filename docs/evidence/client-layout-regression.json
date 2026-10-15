@@ -1,0 +1,42 @@
+{
+  "kind": "isolated-browser-layout-fixture-no-native-ipc",
+  "standard": {
+    "before": {
+      "cardHeight": 267.59375,
+      "notesTop": 584.59375
+    },
+    "during": {
+      "cardHeight": 267.59375,
+      "notesTop": 584.59375,
+      "progressCards": 0
+    },
+    "after": {
+      "cardHeight": 267.59375,
+      "notesTop": 584.59375
+    }
+  },
+  "skeleton": {
+    "during": {
+      "cardHeight": 267.59375,
+      "cardTop": 295,
+      "skeletonPosition": "absolute"
+    },
+    "after": {
+      "cardHeight": 267.59375,
+      "cardTop": 295,
+      "notesTop": 584.59375,
+      "skeletons": 0
+    }
+  },
+  "narrow": {
+    "before": {
+      "height": 267.59375,
+      "top": 563.59375
+    },
+    "during": {
+      "height": 267.59375,
+      "top": 563.59375
+    }
+  },
+  "downloadProgressVisible": true
+}
