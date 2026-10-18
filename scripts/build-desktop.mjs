@@ -2,7 +2,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, cp, mkdtemp, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const platform = process.argv[2] || process.platform;
@@ -10,7 +10,7 @@ const arch = process.argv[3] || process.arch;
 if (!['linux', 'win32', 'darwin'].includes(platform) || !['x64', 'arm64'].includes(arch))
   throw new Error('支持 linux/win32/darwin 与 x64/arm64');
 const require = createRequire(path.join(root, 'web/desktop/package.json'));
-const { packager } = await import(require.resolve('@electron/packager'));
+const { packager } = await import(pathToFileURL(require.resolve('@electron/packager')).href);
 function run(command, args, env = {}) {
   const result = spawnSync(command, args, {
     cwd: root,

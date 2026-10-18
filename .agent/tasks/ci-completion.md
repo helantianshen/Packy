@@ -11,3 +11,5 @@
 用户现已明确授权提交、推送并跟进本次 CI，失败继续修复。正在提交当前 Go/Electron 重构及 CI 完整实现；真实数据库、本地服务配置备份、构建产物和依赖目录不纳入提交。最终以本次提交的八个远端产物及归档内容验证为准。
 
 首轮 39106983930：Go race/vet、构建/烟测、品牌与浏览器通过；Electron 因运行时未下载（ENOENT）失败。Electron npm 包现提供 install-electron CLI，加入 electron:install 命令并由 verify 显式调用，避免依赖已不存在的自动安装行为。
+
+第二轮 39107474036：verify（含 Xvfb Electron）及 Linux 双架构、服务端/后台已通过。Windows x64 核心测试通过，打包入口因将盘符绝对路径直接传给 ESM import 而失败；改用 pathToFileURL 转换，兼容 Windows 路径。
