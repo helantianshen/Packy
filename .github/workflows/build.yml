@@ -35,6 +35,7 @@ jobs:
       - run: node --test web/desktop/tests/brand-files.test.cjs
       - run: npx --no-install playwright install --with-deps --no-shell chromium
       - run: npm run test:browser
+      - run: npm --prefix web/desktop run electron:install
       - name: Electron startup and persistent settings
         shell: bash
         run: |

@@ -78,7 +78,7 @@ npm run server:build                  # 当前主机 API 服务端包，含 SQL/
 
 游戏目录与启动器路径来自内嵌配置。支持 Windows `.exe`、Linux/macOS `.sh`、macOS `.app`；JAR 启动器需设置相对根目录的 `java_path`。不搜索系统 Java，不通过 shell 拼接参数。桌面后台运行默认开启；安装/保存版本不可取消退出；下载可取消，重启只恢复原任务。
 
-开发运行先 `npm --prefix web/desktop run build`，再 `go build -o web/desktop/sidecar/packy-client ./cmd/client`（Windows 加 `.exe`），设置绝对临时目录 `PACKY_DEV_ROOT` 后执行 `npm --prefix web/desktop start`。此变量仅开发定位根目录，不能覆盖内嵌服务地址。
+开发运行先 `npm --prefix web/desktop run electron:install` 显式下载 Electron 运行时，再 `npm --prefix web/desktop run build`，再 `go build -o web/desktop/sidecar/packy-client ./cmd/client`（Windows 加 `.exe`），设置绝对临时目录 `PACKY_DEV_ROOT` 后执行 `npm --prefix web/desktop start`。此变量仅开发定位根目录，不能覆盖内嵌服务地址。
 
 客户端默认图片位于 `web/desktop/public/branding/`，替换后执行 `npm run desktop:build` 即可随包分发，无需玩家另放图片；原生图标源位于 `web/desktop/assets/`。
 
