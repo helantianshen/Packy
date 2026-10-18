@@ -12,3 +12,14 @@
 /.env.*.local
 
 /artifacts/
+
+**/dist-electron/
+/web/desktop/sidecar/
+/.playwright-cli/
+
+/release/
+
+/test-results/
+/playwright-report/
+
+/config/server.yaml.before-*

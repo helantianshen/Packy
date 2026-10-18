@@ -1,94 +1,76 @@
-import { parse } from 'yaml';
 import { spawnSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
-import { readFileSync, mkdirSync, copyFileSync, writeFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { mkdir, cp, mkdtemp, rm } from 'node:fs/promises';
+import path from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-
-function run(command, args, capture = false) {
+import { createRequire } from 'node:module';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const platform = process.argv[2] || process.platform;
+const arch = process.argv[3] || process.arch;
+if (!['linux', 'win32', 'darwin'].includes(platform) || !['x64', 'arm64'].includes(arch))
+  throw new Error('支持 linux/win32/darwin 与 x64/arm64');
+const require = createRequire(path.join(root, 'web/desktop/package.json'));
+const { packager } = await import(require.resolve('@electron/packager'));
+function run(command, args, env = {}) {
   const result = spawnSync(command, args, {
     cwd: root,
-    encoding: 'utf8',
-    stdio: capture ? 'pipe' : 'inherit',
+    stdio: 'inherit',
+    env: { ...process.env, ...env },
+    shell: false,
   });
   if (result.error) throw result.error;
-  if (result.status !== 0)
-    throw new Error(`${command} 执行失败（${result.status}）${result.stderr || ''}`);
-  return result.stdout;
+  if (result.status !== 0) throw new Error(`${command} 构建失败`);
 }
-
+const npmCLI =
+  process.env.npm_execpath ||
+  path.resolve(
+    path.dirname(process.execPath),
+    process.platform === 'win32'
+      ? 'node_modules/npm/bin/npm-cli.js'
+      : '../lib/node_modules/npm/bin/npm-cli.js',
+  );
+run(process.execPath, [npmCLI, '--prefix', 'web/desktop', 'run', 'build']);
+const temporary = await mkdtemp(path.join(tmpdir(), 'packy-package-'));
 try {
-  const native = { win32: 'windows', linux: 'linux', darwin: 'macos' }[process.platform];
-  let platform = native;
-  let checkOnly = false;
-  const args = process.argv.slice(2);
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--platform' && args[i + 1]) platform = args[++i];
-    else if (args[i] === '--check') checkOnly = true;
-    else throw new Error(`未知参数：${args[i]}`);
-  }
-  // 原生构建需要本机 SDK，不能把切换配置当成交叉编译
-  if (!native || platform !== native)
-    throw new Error(`当前系统只能构建 ${native || process.platform}，不能构建 ${platform}`);
-  const target = run('rustc', ['-vV'], true).match(/^host: (.+)$/m)?.[1];
-  if (!target) throw new Error('无法识别 Rust 本机目标');
-  if (process.env.CARGO_BUILD_TARGET && process.env.CARGO_BUILD_TARGET !== target)
-    throw new Error('CARGO_BUILD_TARGET 与本机目标不同，请在对应平台构建');
-  const config = `config/client.${platform}.yaml`;
-  const configBytes = readFileSync(resolve(root, config));
-  parse(configBytes.toString());
-  const name = `packy-desktop-${platform}-${target}`;
-  const plan = { platform, target, config, output: `artifacts/desktop/${name}.tar.gz` };
-  console.log(JSON.stringify(plan, null, 2));
-  if (!checkOnly) {
-    const npm = process.env.npm_execpath;
-    if (!npm) throw new Error('请通过 npm run desktop:build 执行构建');
-    const npmRun = (args) => run(process.execPath, [npm, ...args]);
-    npmRun(['run', 'types']);
-    npmRun([
-      'run',
-      'tauri',
-      '--workspace',
-      '@packy/desktop',
-      '--',
+  const sidecar = path.join(temporary, 'sidecar');
+  await mkdir(sidecar, { recursive: true });
+  run(
+    'go',
+    [
       'build',
-      '--no-bundle',
-      '--target',
-      target,
-      '--',
-      '--locked',
-    ]);
-    if (!configBytes.equals(readFileSync(resolve(root, config))))
-      throw new Error('构建期间配置发生变化，请重新构建');
-    const metadata = JSON.parse(
-      run('cargo', ['metadata', '--no-deps', '--format-version', '1'], true),
-    );
-    const binary = `packy-desktop${platform === 'windows' ? '.exe' : ''}`;
-    const source = resolve(metadata.target_directory, target, 'release', binary);
-    const output = resolve(root, 'artifacts/desktop');
-    const folder = resolve(output, name);
-    mkdirSync(folder, { recursive: true });
-    copyFileSync(source, resolve(folder, binary));
-    const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
-    writeFileSync(
-      resolve(folder, 'build-info.json'),
-      JSON.stringify(
-        {
-          ...plan,
-          config_sha256: sha256(configBytes),
-          binary_sha256: sha256(readFileSync(source)),
-        },
-        null,
-        2,
-      ) + '\n',
-    );
-    // tar 保留 Linux/macOS 执行权限，归档中只有程序和构建摘要
-    run('tar', ['-czf', resolve(root, plan.output), '-C', folder, binary, 'build-info.json']);
-    console.log(`构建完成：${plan.output}`);
-  }
-} catch (error) {
-  console.error(error.message);
-  process.exitCode = 1;
+      '-trimpath',
+      '-o',
+      path.join(sidecar, platform === 'win32' ? 'packy-client.exe' : 'packy-client'),
+      './cmd/client',
+    ],
+    {
+      CGO_ENABLED: '0',
+      GOOS: platform === 'win32' ? 'windows' : platform,
+      GOARCH: arch === 'x64' ? 'amd64' : 'arm64',
+    },
+  );
+  const app = path.join(temporary, 'app');
+  await mkdir(app, { recursive: true });
+  // 打包输入只包含当前构建与资源，依赖由 Packager 保留生产部分
+  await cp(path.join(root, 'web/desktop'), app, {
+    recursive: true,
+    filter: (src) => !['sidecar', '.vite'].includes(path.basename(src)),
+  });
+  const result = await packager({
+    dir: app,
+    name: 'Packy',
+    platform,
+    arch,
+    out: path.join(root, 'artifacts', 'desktop'),
+    overwrite: true,
+    asar: true,
+    prune: true,
+    extraResource: [sidecar, path.join(root, 'web/desktop/assets')],
+    icon: platform === 'win32' ? path.join(root, 'web/desktop/assets/icon.ico') : undefined,
+    ignore: [/^\/src/, /^\/electron/, /^\/tests/, /^\/tsconfig/, /^\/vite.config/],
+    appBundleId: 'top.hikaritish.packy',
+  });
+  console.log(result.join('\n'));
+} finally {
+  await rm(temporary, { recursive: true, force: true });
 }

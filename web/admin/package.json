@@ -1,15 +1,50 @@
 {
-  "name": "@packy/admin",
+  "name": "arco-design-pro-vue",
+  "description": "Arco Design Pro for Vue",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "author": "ArcoDesign Team",
+  "license": "MIT",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 1421 --strictPort",
-    "build": "vue-tsc --noEmit && vite build",
-    "check": "vue-tsc --noEmit"
+    "dev": "vite --config ./config/vite.config.dev.ts",
+    "build": "vue-tsc --noEmit && vite build --config ./config/vite.config.prod.ts",
+    "report": "cross-env REPORT=true npm run build",
+    "preview": "vite preview --config ./config/vite.config.dev.ts",
+    "type:check": "vue-tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
-    "vue": "3.5.44",
-    "@arco-design/web-vue": "2.58.0",
-    "@lucide/vue": "1.57.0"
+    "@arco-design/web-vue": "^2.44.7",
+    "@vueuse/core": "^9.3.0",
+    "axios": "^1.12.2",
+    "dayjs": "^1.11.5",
+    "lodash": "^4.17.21",
+    "mitt": "^3.0.0",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.23",
+    "vue": "^3.2.40",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.0.14"
+  },
+  "devDependencies": {
+    "@arco-plugins/vite-vue": "^1.4.5",
+    "@types/lodash": "^4.14.186",
+    "@types/nprogress": "^0.2.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitejs/plugin-vue-jsx": "^4.2.0",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "consola": "^2.15.3",
+    "cross-env": "^7.0.3",
+    "less": "^4.1.3",
+    "prettier": "^2.7.1",
+    "rollup-plugin-visualizer": "^5.8.2",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-svg-loader": "^5.1.0",
+    "vue-tsc": "3.1.0",
+    "unplugin-vue-components": "^32.1.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

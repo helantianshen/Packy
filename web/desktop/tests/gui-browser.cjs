@@ -1,0 +1,165 @@
+async (page) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.addInitScript(() => {
+    const id = '11111111-1111-4111-8111-111111111111';
+    const state = {
+      can_launch: false,
+      config: {
+        pack_name: '蒹葭服务器整合包',
+        pack_id: id,
+        server_url: 'https://example.invalid',
+        game_dir: '.minecraft',
+        launcher_path: 'HMCL.jar',
+      },
+      preferences: { background_enabled: true },
+      state: { installed_release_id: id },
+      status: {
+        task_id: '',
+        instance_id: 'test',
+        sequence: 1,
+        phase: 'available',
+        completed_files: 0,
+        total_files: 2,
+        downloaded_bytes: 0,
+        total_bytes: 134217728,
+        bytes_per_second: 0,
+      },
+      plan: {
+        pack_id: id,
+        pack_name: '蒹葭服务器整合包',
+        target_release_id: '22222222-2222-4222-8222-222222222222',
+        target_version: '1.5.0',
+        changelog: '优化性能与光影兼容性\n本次更新调整渲染组件，并移除旧版兼容补丁。',
+        operations: [
+          {
+            action: 'ADD',
+            mod_id: 'a',
+            target: {
+              path: 'mods/sodium-0.6.jar',
+              size: 67108864,
+              sha512: 'a'.repeat(128),
+              sources: [],
+            },
+          },
+          {
+            action: 'REPLACE',
+            mod_id: 'b',
+            old_path: 'mods/iris-1.6.jar',
+            target: {
+              path: 'mods/iris-1.7.jar',
+              size: 67108864,
+              sha512: 'b'.repeat(128),
+              sources: [],
+            },
+          },
+          { action: 'REMOVE', mod_id: 'c', old_path: 'mods/legacy-fix.jar' },
+        ],
+      },
+    };
+    let listener;
+    window.__state = state;
+    window.__calls = [];
+    window.__emit = (phase, patch = {}) => {
+      Object.assign(state.status, { phase, sequence: state.status.sequence + 1, ...patch });
+      listener?.(structuredClone(state));
+    };
+    window.packy = {
+      branding: async () => ({}),
+      onUnavailable: () => () => {},
+      onStatus: (fn) => {
+        listener = fn;
+        return () => {};
+      },
+      invoke: async (command, args) => {
+        window.__calls.push({ command, args });
+        if (command === 'start_update')
+          window.__emit('downloading', {
+            task_id: 'task-1',
+            downloaded_bytes: 83256934,
+            bytes_per_second: 8598323,
+          });
+        if (command === 'cancel_update') window.__emit('cancelled');
+        if (command === 'retry_update') window.__emit('downloading', { error: undefined });
+        if (command === 'set_background_enabled')
+          state.preferences.background_enabled = args.enabled;
+        return structuredClone(state);
+      },
+    };
+    localStorage.setItem('packy-theme', 'light');
+  });
+  await page.setViewportSize({ width: 1060, height: 760 });
+  await page.goto('http://127.0.0.1:5174');
+  await page.getByRole('button', { name: '查看并安装', exact: true }).waitFor();
+  await page.locator('.landscape-light').evaluate((img) => img.decode());
+  const folder = '.impeccable/review/client-b/';
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'home-light.png', fullPage: true });
+  await page.getByRole('button', { name: '切换深色主题' }).click();
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'home-dark.png', fullPage: true });
+  await page.getByRole('button', { name: '查看并安装', exact: true }).click();
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'confirm-dark.png', fullPage: true });
+  await page.getByRole('button', { name: '开始更新', exact: true }).click();
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'downloading-dark.png', fullPage: true });
+  await page.getByRole('button', { name: '取消更新', exact: true }).click();
+  await page.getByRole('button', { name: '重试原任务', exact: true }).click();
+  await page.evaluate(() => window.__emit('installing'));
+  if (await page.getByRole('button', { name: '取消更新', exact: true }).count())
+    throw Error('安装仍可取消');
+  if (await page.getByRole('button', { name: '打开启动器', exact: true }).count())
+    throw Error('安装仍可启动');
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'installing-dark.png', fullPage: true });
+  await page.evaluate(() =>
+    window.__emit('failed', {
+      error: { code: 'DOWNLOAD_FAILED', message: '连接超时，请检查网络后重试' },
+    }),
+  );
+  if (await page.getByRole('button', { name: '重新检查', exact: true }).count())
+    throw Error('失败原任务出现重新检查');
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'failure-dark.png', fullPage: true });
+  await page.evaluate(() => {
+    window.__state.can_launch = true;
+    window.__state.state.installed_release_id = window.__state.plan.target_release_id;
+    window.__emit('completed', { error: undefined });
+  });
+  await page.getByRole('button', { name: '打开启动器', exact: true }).click();
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'complete-dark.png', fullPage: true });
+  await page.getByRole('button', { name: '配置与说明', exact: true }).click();
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'settings-dark.png', fullPage: true });
+  await page.getByRole('button', { name: '浅色', exact: true }).click();
+  await page.setViewportSize({ width: 720, height: 560 });
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'settings-small.png', fullPage: true });
+  const dimensions = [];
+  for (const width of [390, 720, 1060, 1440]) {
+    await page.setViewportSize({ width, height: 760 });
+    const d = await page.evaluate(() => ({
+      width: innerWidth,
+      scroll: document.documentElement.scrollWidth,
+      body: getComputedStyle(document.body).fontSize,
+      button: getComputedStyle(document.querySelector('nav button')).fontSize,
+    }));
+    if (d.scroll > d.width) throw Error('水平溢出 ' + JSON.stringify(d));
+    dimensions.push(d);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'settings-mobile.png', fullPage: true });
+  await page.getByRole('button', { name: '更新', exact: true }).click();
+  await page.evaluate(() => {
+    window.__state.can_launch = false;
+    window.__state.state.installed_release_id = '11111111-1111-4111-8111-111111111111';
+    window.__emit('available', { task_id: '', error: undefined });
+  });
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: folder + 'home-mobile.png', fullPage: true });
+  if (errors.length) throw Error(errors.join('\n'));
+  return { passed: true, dimensions, calls: await page.evaluate(() => window.__calls) };
+};

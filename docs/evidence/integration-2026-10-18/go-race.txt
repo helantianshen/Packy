@@ -1,0 +1,11 @@
+?   	packy/cmd/client	[no test files]
+?   	packy/cmd/server	[no test files]
+ok  	packy/internal/client/application	2.540s
+?   	packy/internal/client/infrastructure	[no test files]
+?   	packy/internal/client/rpc	[no test files]
+?   	packy/internal/server/api	[no test files]
+ok  	packy/internal/server/application	1.053s
+?   	packy/internal/server/domain	[no test files]
+?   	packy/internal/server/infrastructure	[no test files]
+ok  	packy/pkg/protocol	(cached)
+?   	packy/config	[no test files]

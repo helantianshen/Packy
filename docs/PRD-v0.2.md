@@ -2,7 +2,7 @@
 
 **文档版本：** PRD v0.2（审查稿）  
 **更新日期：** 2026-10-15  
-**状态：** 业务需求保持不变；Rust/Tauri 代码已实现，跨平台与原生交互验收进行中  
+**状态：** 历史业务基线；2026-10-18 新栈与单管理员简化以 docs/specs/go-electron-redevelopment.md、docs/contracts 为准，本文注册/RBAC/Tauri 要求已撤销
 **阶段：** MVP（第一版）  
 **目标：** 为后续架构设计、任务拆分及 Coding Agent 实现提供需求基线。
 

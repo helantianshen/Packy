@@ -1,0 +1,559 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-17T18:09:06.340433+00:00",
+  "title": "Design System: Packy 客户端",
+  "extensions": {
+    "colorMeta": {
+      "light-canvas": {
+        "displayName": "light-canvas",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0080 114.22)",
+          "oklch(26.43% 0.0080 114.22)",
+          "oklch(37.86% 0.0080 114.22)",
+          "oklch(49.29% 0.0080 114.22)",
+          "oklch(60.71% 0.0080 114.22)",
+          "oklch(72.14% 0.0080 114.22)",
+          "oklch(83.57% 0.0080 114.22)",
+          "oklch(95.00% 0.0080 114.22)"
+        ]
+      },
+      "light-surface": {
+        "displayName": "light-surface",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0054 95.10)",
+          "oklch(26.43% 0.0054 95.10)",
+          "oklch(37.86% 0.0054 95.10)",
+          "oklch(49.29% 0.0054 95.10)",
+          "oklch(60.71% 0.0054 95.10)",
+          "oklch(72.14% 0.0054 95.10)",
+          "oklch(83.57% 0.0054 95.10)",
+          "oklch(95.00% 0.0054 95.10)"
+        ]
+      },
+      "light-subtle": {
+        "displayName": "light-subtle",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0147 132.47)",
+          "oklch(26.43% 0.0147 132.47)",
+          "oklch(37.86% 0.0147 132.47)",
+          "oklch(49.29% 0.0147 132.47)",
+          "oklch(60.71% 0.0147 132.47)",
+          "oklch(72.14% 0.0147 132.47)",
+          "oklch(83.57% 0.0147 132.47)",
+          "oklch(95.00% 0.0147 132.47)"
+        ]
+      },
+      "light-text": {
+        "displayName": "light-text",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0243 159.15)",
+          "oklch(26.43% 0.0243 159.15)",
+          "oklch(37.86% 0.0243 159.15)",
+          "oklch(49.29% 0.0243 159.15)",
+          "oklch(60.71% 0.0243 159.15)",
+          "oklch(72.14% 0.0243 159.15)",
+          "oklch(83.57% 0.0243 159.15)",
+          "oklch(95.00% 0.0243 159.15)"
+        ]
+      },
+      "light-muted": {
+        "displayName": "light-muted",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0261 159.46)",
+          "oklch(26.43% 0.0261 159.46)",
+          "oklch(37.86% 0.0261 159.46)",
+          "oklch(49.29% 0.0261 159.46)",
+          "oklch(60.71% 0.0261 159.46)",
+          "oklch(72.14% 0.0261 159.46)",
+          "oklch(83.57% 0.0261 159.46)",
+          "oklch(95.00% 0.0261 159.46)"
+        ]
+      },
+      "light-line": {
+        "displayName": "light-line",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0159 139.44)",
+          "oklch(26.43% 0.0159 139.44)",
+          "oklch(37.86% 0.0159 139.44)",
+          "oklch(49.29% 0.0159 139.44)",
+          "oklch(60.71% 0.0159 139.44)",
+          "oklch(72.14% 0.0159 139.44)",
+          "oklch(83.57% 0.0159 139.44)",
+          "oklch(95.00% 0.0159 139.44)"
+        ]
+      },
+      "light-accent": {
+        "displayName": "light-accent",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.1177 151.59)",
+          "oklch(26.43% 0.1177 151.59)",
+          "oklch(37.86% 0.1177 151.59)",
+          "oklch(49.29% 0.1177 151.59)",
+          "oklch(60.71% 0.1177 151.59)",
+          "oklch(72.14% 0.1177 151.59)",
+          "oklch(83.57% 0.1177 151.59)",
+          "oklch(95.00% 0.1177 151.59)"
+        ]
+      },
+      "light-accent-hover": {
+        "displayName": "light-accent-hover",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.1034 151.38)",
+          "oklch(26.43% 0.1034 151.38)",
+          "oklch(37.86% 0.1034 151.38)",
+          "oklch(49.29% 0.1034 151.38)",
+          "oklch(60.71% 0.1034 151.38)",
+          "oklch(72.14% 0.1034 151.38)",
+          "oklch(83.57% 0.1034 151.38)",
+          "oklch(95.00% 0.1034 151.38)"
+        ]
+      },
+      "light-on-accent": {
+        "displayName": "light-on-accent",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88)",
+          "oklch(26.43% 0.0000 89.88)",
+          "oklch(37.86% 0.0000 89.88)",
+          "oklch(49.29% 0.0000 89.88)",
+          "oklch(60.71% 0.0000 89.88)",
+          "oklch(72.14% 0.0000 89.88)",
+          "oklch(83.57% 0.0000 89.88)",
+          "oklch(95.00% 0.0000 89.88)"
+        ]
+      },
+      "light-accent-soft": {
+        "displayName": "light-accent-soft",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0234 149.37)",
+          "oklch(26.43% 0.0234 149.37)",
+          "oklch(37.86% 0.0234 149.37)",
+          "oklch(49.29% 0.0234 149.37)",
+          "oklch(60.71% 0.0234 149.37)",
+          "oklch(72.14% 0.0234 149.37)",
+          "oklch(83.57% 0.0234 149.37)",
+          "oklch(95.00% 0.0234 149.37)"
+        ]
+      },
+      "light-warning": {
+        "displayName": "light-warning",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1038 60.95)",
+          "oklch(26.43% 0.1038 60.95)",
+          "oklch(37.86% 0.1038 60.95)",
+          "oklch(49.29% 0.1038 60.95)",
+          "oklch(60.71% 0.1038 60.95)",
+          "oklch(72.14% 0.1038 60.95)",
+          "oklch(83.57% 0.1038 60.95)",
+          "oklch(95.00% 0.1038 60.95)"
+        ]
+      },
+      "light-warning-bg": {
+        "displayName": "light-warning-bg",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0220 80.69)",
+          "oklch(26.43% 0.0220 80.69)",
+          "oklch(37.86% 0.0220 80.69)",
+          "oklch(49.29% 0.0220 80.69)",
+          "oklch(60.71% 0.0220 80.69)",
+          "oklch(72.14% 0.0220 80.69)",
+          "oklch(83.57% 0.0220 80.69)",
+          "oklch(95.00% 0.0220 80.69)"
+        ]
+      },
+      "light-danger": {
+        "displayName": "light-danger",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1610 25.94)",
+          "oklch(26.43% 0.1610 25.94)",
+          "oklch(37.86% 0.1610 25.94)",
+          "oklch(49.29% 0.1610 25.94)",
+          "oklch(60.71% 0.1610 25.94)",
+          "oklch(72.14% 0.1610 25.94)",
+          "oklch(83.57% 0.1610 25.94)",
+          "oklch(95.00% 0.1610 25.94)"
+        ]
+      },
+      "light-blue": {
+        "displayName": "light-blue",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1229 254.50)",
+          "oklch(26.43% 0.1229 254.50)",
+          "oklch(37.86% 0.1229 254.50)",
+          "oklch(49.29% 0.1229 254.50)",
+          "oklch(60.71% 0.1229 254.50)",
+          "oklch(72.14% 0.1229 254.50)",
+          "oklch(83.57% 0.1229 254.50)",
+          "oklch(95.00% 0.1229 254.50)"
+        ]
+      },
+      "light-focus": {
+        "displayName": "light-focus",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1631 257.02)",
+          "oklch(26.43% 0.1631 257.02)",
+          "oklch(37.86% 0.1631 257.02)",
+          "oklch(49.29% 0.1631 257.02)",
+          "oklch(60.71% 0.1631 257.02)",
+          "oklch(72.14% 0.1631 257.02)",
+          "oklch(83.57% 0.1631 257.02)",
+          "oklch(95.00% 0.1631 257.02)"
+        ]
+      },
+      "dark-canvas": {
+        "displayName": "dark-canvas",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0223 175.10)",
+          "oklch(26.43% 0.0223 175.10)",
+          "oklch(37.86% 0.0223 175.10)",
+          "oklch(49.29% 0.0223 175.10)",
+          "oklch(60.71% 0.0223 175.10)",
+          "oklch(72.14% 0.0223 175.10)",
+          "oklch(83.57% 0.0223 175.10)",
+          "oklch(95.00% 0.0223 175.10)"
+        ]
+      },
+      "dark-surface": {
+        "displayName": "dark-surface",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0295 169.38)",
+          "oklch(26.43% 0.0295 169.38)",
+          "oklch(37.86% 0.0295 169.38)",
+          "oklch(49.29% 0.0295 169.38)",
+          "oklch(60.71% 0.0295 169.38)",
+          "oklch(72.14% 0.0295 169.38)",
+          "oklch(83.57% 0.0295 169.38)",
+          "oklch(95.00% 0.0295 169.38)"
+        ]
+      },
+      "dark-subtle": {
+        "displayName": "dark-subtle",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0328 166.24)",
+          "oklch(26.43% 0.0328 166.24)",
+          "oklch(37.86% 0.0328 166.24)",
+          "oklch(49.29% 0.0328 166.24)",
+          "oklch(60.71% 0.0328 166.24)",
+          "oklch(72.14% 0.0328 166.24)",
+          "oklch(83.57% 0.0328 166.24)",
+          "oklch(95.00% 0.0328 166.24)"
+        ]
+      },
+      "dark-text": {
+        "displayName": "dark-text",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0125 149.25)",
+          "oklch(26.43% 0.0125 149.25)",
+          "oklch(37.86% 0.0125 149.25)",
+          "oklch(49.29% 0.0125 149.25)",
+          "oklch(60.71% 0.0125 149.25)",
+          "oklch(72.14% 0.0125 149.25)",
+          "oklch(83.57% 0.0125 149.25)",
+          "oklch(95.00% 0.0125 149.25)"
+        ]
+      },
+      "dark-muted": {
+        "displayName": "dark-muted",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0246 149.29)",
+          "oklch(26.43% 0.0246 149.29)",
+          "oklch(37.86% 0.0246 149.29)",
+          "oklch(49.29% 0.0246 149.29)",
+          "oklch(60.71% 0.0246 149.29)",
+          "oklch(72.14% 0.0246 149.29)",
+          "oklch(83.57% 0.0246 149.29)",
+          "oklch(95.00% 0.0246 149.29)"
+        ]
+      },
+      "dark-line": {
+        "displayName": "dark-line",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0353 161.32)",
+          "oklch(26.43% 0.0353 161.32)",
+          "oklch(37.86% 0.0353 161.32)",
+          "oklch(49.29% 0.0353 161.32)",
+          "oklch(60.71% 0.0353 161.32)",
+          "oklch(72.14% 0.0353 161.32)",
+          "oklch(83.57% 0.0353 161.32)",
+          "oklch(95.00% 0.0353 161.32)"
+        ]
+      },
+      "dark-accent": {
+        "displayName": "dark-accent",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.1688 152.11)",
+          "oklch(26.43% 0.1688 152.11)",
+          "oklch(37.86% 0.1688 152.11)",
+          "oklch(49.29% 0.1688 152.11)",
+          "oklch(60.71% 0.1688 152.11)",
+          "oklch(72.14% 0.1688 152.11)",
+          "oklch(83.57% 0.1688 152.11)",
+          "oklch(95.00% 0.1688 152.11)"
+        ]
+      },
+      "dark-accent-hover": {
+        "displayName": "dark-accent-hover",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.1500 152.75)",
+          "oklch(26.43% 0.1500 152.75)",
+          "oklch(37.86% 0.1500 152.75)",
+          "oklch(49.29% 0.1500 152.75)",
+          "oklch(60.71% 0.1500 152.75)",
+          "oklch(72.14% 0.1500 152.75)",
+          "oklch(83.57% 0.1500 152.75)",
+          "oklch(95.00% 0.1500 152.75)"
+        ]
+      },
+      "dark-on-accent": {
+        "displayName": "dark-on-accent",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0566 153.93)",
+          "oklch(26.43% 0.0566 153.93)",
+          "oklch(37.86% 0.0566 153.93)",
+          "oklch(49.29% 0.0566 153.93)",
+          "oklch(60.71% 0.0566 153.93)",
+          "oklch(72.14% 0.0566 153.93)",
+          "oklch(83.57% 0.0566 153.93)",
+          "oklch(95.00% 0.0566 153.93)"
+        ]
+      },
+      "dark-accent-soft": {
+        "displayName": "dark-accent-soft",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0520 156.62)",
+          "oklch(26.43% 0.0520 156.62)",
+          "oklch(37.86% 0.0520 156.62)",
+          "oklch(49.29% 0.0520 156.62)",
+          "oklch(60.71% 0.0520 156.62)",
+          "oklch(72.14% 0.0520 156.62)",
+          "oklch(83.57% 0.0520 156.62)",
+          "oklch(95.00% 0.0520 156.62)"
+        ]
+      },
+      "dark-warning": {
+        "displayName": "dark-warning",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1093 78.80)",
+          "oklch(26.43% 0.1093 78.80)",
+          "oklch(37.86% 0.1093 78.80)",
+          "oklch(49.29% 0.1093 78.80)",
+          "oklch(60.71% 0.1093 78.80)",
+          "oklch(72.14% 0.1093 78.80)",
+          "oklch(83.57% 0.1093 78.80)",
+          "oklch(95.00% 0.1093 78.80)"
+        ]
+      },
+      "dark-warning-bg": {
+        "displayName": "dark-warning-bg",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0265 81.29)",
+          "oklch(26.43% 0.0265 81.29)",
+          "oklch(37.86% 0.0265 81.29)",
+          "oklch(49.29% 0.0265 81.29)",
+          "oklch(60.71% 0.0265 81.29)",
+          "oklch(72.14% 0.0265 81.29)",
+          "oklch(83.57% 0.0265 81.29)",
+          "oklch(95.00% 0.0265 81.29)"
+        ]
+      },
+      "dark-danger": {
+        "displayName": "dark-danger",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.1013 23.95)",
+          "oklch(26.43% 0.1013 23.95)",
+          "oklch(37.86% 0.1013 23.95)",
+          "oklch(49.29% 0.1013 23.95)",
+          "oklch(60.71% 0.1013 23.95)",
+          "oklch(72.14% 0.1013 23.95)",
+          "oklch(83.57% 0.1013 23.95)",
+          "oklch(95.00% 0.1013 23.95)"
+        ]
+      },
+      "dark-blue": {
+        "displayName": "dark-blue",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0895 255.91)",
+          "oklch(26.43% 0.0895 255.91)",
+          "oklch(37.86% 0.0895 255.91)",
+          "oklch(49.29% 0.0895 255.91)",
+          "oklch(60.71% 0.0895 255.91)",
+          "oklch(72.14% 0.0895 255.91)",
+          "oklch(83.57% 0.0895 255.91)",
+          "oklch(95.00% 0.0895 255.91)"
+        ]
+      },
+      "dark-focus": {
+        "displayName": "dark-focus",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15.00% 0.0898 257.40)",
+          "oklch(26.43% 0.0898 257.40)",
+          "oklch(37.86% 0.0898 257.40)",
+          "oklch(49.29% 0.0898 257.40)",
+          "oklch(60.71% 0.0898 257.40)",
+          "oklch(72.14% 0.0898 257.40)",
+          "oklch(83.57% 0.0898 257.40)",
+          "oklch(95.00% 0.0898 257.40)"
+        ]
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-light",
+        "value": "0 6px 20px #142f1910",
+        "purpose": "浅色内容面板"
+      },
+      {
+        "name": "panel-dark",
+        "value": "0 6px 20px #00000018",
+        "purpose": "深色内容面板"
+      },
+      {
+        "name": "dialog",
+        "value": "0 20px 64px #0004",
+        "purpose": "确认弹窗"
+      }
+    ],
+    "motion": [
+      {
+        "name": "control",
+        "value": "140ms",
+        "purpose": "按钮与开关过渡"
+      },
+      {
+        "name": "progress-width",
+        "value": "200ms",
+        "purpose": "进度宽度过渡"
+      },
+      {
+        "name": "loading",
+        "value": "1.4s linear infinite",
+        "purpose": "加载旋转"
+      },
+      {
+        "name": "indeterminate",
+        "value": "1.8s ease-in-out infinite alternate",
+        "purpose": "未知进度往返"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-width",
+        "value": "799px"
+      },
+      {
+        "name": "narrow-width",
+        "value": "480px"
+      },
+      {
+        "name": "compact-height",
+        "value": "620px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "主要按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "主要按钮：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<button class=\"ds-button ds-primary\">开始更新</button>",
+      "css": ".ds-button{font:550 14px/1.57 system-ui;min-height:36px;padding:7px 16px;border:1px solid var(--line,#dce4da);border-radius:8px;cursor:pointer;transition:background-color 140ms,border-color 140ms,box-shadow 140ms}.ds-button:focus-visible{outline:2px solid var(--focus,#276fce);outline-offset:3px}.ds-button:active{box-shadow:inset 0 1px 3px #0002}.ds-primary{background:var(--accent,#18713b);border-color:var(--accent,#18713b);color:var(--on-accent,#fff)}.ds-primary:hover{background:var(--accent-hover,#105c2e);border-color:var(--accent-hover,#105c2e)}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "次要按钮",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "次要按钮：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<button class=\"ds-button ds-secondary\">检查更新</button>",
+      "css": ".ds-button{font:550 14px/1.57 system-ui;min-height:36px;padding:7px 16px;border:1px solid var(--line,#dce4da);border-radius:8px;cursor:pointer;transition:background-color 140ms,border-color 140ms,box-shadow 140ms}.ds-button:focus-visible{outline:2px solid var(--focus,#276fce);outline-offset:3px}.ds-button:active{box-shadow:inset 0 1px 3px #0002}.ds-secondary{background:var(--surface,#fffefa);color:var(--text,#1b2921)}.ds-secondary:hover{background:var(--subtle,#edf3e9);border-color:var(--muted,#53645a)}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "状态标签",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "状态标签：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<span class=\"ds-status\">准备就绪</span>",
+      "css": ".ds-status{display:inline-flex;padding:3px 10px;border-radius:20px;background:var(--accent-soft,#e4f3e6);color:var(--accent,#18713b);font:600 13px/1.57 system-ui}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "内容面板",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "内容面板：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<section class=\"ds-panel\">更新内容</section>",
+      "css": ".ds-panel{padding:24px;background:var(--surface,#fffefa);color:var(--text,#1b2921);border:1px solid var(--line,#dce4da);border-radius:12px;box-shadow:var(--shadow,0 6px 20px #142f1910);font:14px/1.57 system-ui}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "顶部导航",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "顶部导航：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<nav class=\"ds-nav\"><button aria-current=\"page\">更新</button><button>配置与说明</button></nav>",
+      "css": ".ds-nav{display:flex;gap:8px;background:var(--surface,#fffefa)}.ds-nav button{font:550 14px/1.57 system-ui;min-height:36px;padding:6px 12px;border:0;border-bottom:3px solid transparent;background:none;color:var(--text,#1b2921);cursor:pointer}.ds-nav button[aria-current]{color:var(--accent,#18713b);border-bottom-color:var(--accent,#18713b)}.ds-nav button:hover{background:var(--subtle,#edf3e9)}.ds-nav button:focus-visible{outline:2px solid var(--focus,#276fce);outline-offset:3px}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "后台运行开关",
+      "kind": "input",
+      "refersTo": "switch",
+      "description": "后台运行开关：提取自客户端当前样式，示例文案仅用于展示",
+      "html": "<input class=\"ds-switch\" type=\"checkbox\" role=\"switch\" aria-label=\"后台运行\" checked>",
+      "css": ".ds-switch{appearance:none;position:relative;width:38px;height:22px;border-radius:20px;background:var(--muted,#53645a);cursor:pointer;transition:background-color 140ms}.ds-switch:after{content:\"\";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform 140ms}.ds-switch:checked{background:var(--accent,#18713b)}.ds-switch:checked:after{transform:translateX(16px)}.ds-switch:focus-visible{outline:2px solid var(--focus,#276fce);outline-offset:3px}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "森林中的整合包出发站",
+    "overview": "仅适用 web/desktop。森林绿色与体素森林包头营造游戏氛围，固定组件尺度与断点重排保障可读性。管理后台保持 Arco Design Pro Vue 官方模板。色阶为展示面板合成的 OKLCH 色阶，不是生产新增 token。",
+    "keyCharacteristics": [
+      "明暗独立素材",
+      "顶部导航",
+      "稳定字号与组件尺度",
+      "长名称实色背景保护"
+    ],
+    "rules": [
+      {
+        "name": "文字区保护",
+        "body": "包名实际文字区域使用不透明 surface，渐变只负责外缘衔接",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "保留语义状态文字与键盘焦点",
+      "长内容换行，窄窗口重排",
+      "尊重 prefers-reduced-motion"
+    ],
+    "donts": [
+      "不迁移客户端风格到 admin",
+      "不整体缩放应用",
+      "不将发布 ID 当作版本号"
+    ]
+  }
+}

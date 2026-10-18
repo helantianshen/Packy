@@ -1,138 +1,60 @@
-# 接口契约
+# Go / Electron 人工协议 v1
 
-核验日期：2026-10-15。以下接口已由 Rust 实现。当前字段以 crates/common/src/models 与生成的 web/shared/generated 为准；[旧 JSON 字段](FIELDS.md) 仅供迁移追溯。运行验证范围见 [验证记录](../VERIFICATION.md)。
+HTTP JSON 使用 snake_case，不包裹 `{code,data}`。错误为 `{code,message,request_id}`，响应头带 X-Request-ID。400 参数、401 登录失效、404 不存在、409 冲突、429 限流、502 上游、503 无可用来源、500 内部错误。JSON 最大 1 MiB，拒绝重复键与未知字段。列表 `{items,total,page,page_size}`，page 从 1 开始，page_size 默认 20、最大 100。
 
-## 1. 公共规则
+## HTTP
 
-HTTP JSON 使用 snake_case、UTF-8；成功体直接返回资源，不包 data。列表为 Page<T>：items、total、page、page_size；page 默认 1，page_size 默认 20、最大 100。集合必须返回 []，可空标量返回 null。未知请求字段返回 400；注册体仅 username/password，不接收角色字段。
+公开：GET `/healthz`；POST `/api/v1/auth/login`（username/password，响应 access_token/token_type/expires_in）；POST `/api/v1/packs/:pack/update-plan`（installed_release_id/client_version）；GET/HEAD `/api/v1/files/:id/download`（支持 Range）。其余接口用 Bearer JWT。GET `/api/v1/auth/me` 返回 id/username；POST `/api/v1/auth/logout` 返回 204 并废止该管理员所有现有 Token。JWT 为 HS256，issuer=packy，audience=packy-admin，1800 秒。
 
-资源 ID 为服务端生成的 UUID 字符串，业务 modid 大小写敏感且唯一，名称不唯一；ModID/mod_id 是稳定内部 ID。日期 RFC3339 UTC。文件大小为非负 int64 或 null，SHA-512 为 128 位小写十六进制，来源优先级为非负整数（小值先用）；文件来源类型仅四个内置编码。JSON 路径用 /，相对游戏实例目录；合法性检查必须兼容 Windows，不能只拼路径。
+下表路径均加 `/api/v1/admin`。只有一个管理员，无注册、角色、租户或用户管理。
 
-API 基址 /api/v1。管理请求 Authorization: Bearer <JWT>。通用错误体 APIError：code、message、request_id；内部栈与凭据不返回。
-
-| 状态 | code |
-|---|---|
-| 400 | INVALID_REQUEST |
-| 401 | UNAUTHENTICATED |
-| 403 | FORBIDDEN、REGISTRATION_CLOSED |
-| 404 | NOT_FOUND |
-| 409 | CONFLICT、NO_PUBLISHED_RELEASE |
-| 429 | RATE_LIMITED |
-| 502 / 503 | UPSTREAM_UNAVAILABLE、SOURCE_UNAVAILABLE |
-| 500 | INTERNAL_ERROR |
-
-/healthz 表示进程存活，不代表数据库就绪或业务可用。
-
-## 2. 公开与认证接口
-
-| 方法与路径 | 请求 | 成功响应 | 授权 |
-|---|---|---|---|
-| GET /healthz | 无 | 200 Health | 公开 |
-| POST /api/v1/packs/{pack_id}/update-plan | UpdatePlanRequest | 200 UpdatePlan | 公开 |
-| GET /api/v1/files/{file_id}/download | 无 | 200/206 JAR 二进制 | 公开，仅已有托管文件标识 |
-| GET /api/v1/auth/registration-status | 无 | 200 SystemSettings | 公开，只返回开关 |
-| POST /api/v1/auth/register | Credentials | 201 Account | 公开；事务内检查开关，只创建 user |
-| POST /api/v1/auth/login | Credentials | 200 LoginResponse | 公开 |
-| POST /api/v1/auth/logout | 无 | 204 | 已登录；增加账号 token_version |
-| GET /api/v1/auth/me | 无 | 200 Account | 已登录，返回当前 RBAC |
-
-账号 username：3—32 个 ASCII 字母、数字、下划线或短横线，唯一性不区分 ASCII 大小写；password 为 8—72 UTF-8 字节。账号 ID 不由注册请求指定。JWT 采用 HS256，至少 32 随机字节密钥，issuer=packy、audience=packy-admin，TTL=1800 秒，无 refresh token。声明 sub、iss、aud、iat、exp、jti、token_version；只接受 HS256，校验账号启用与 token_version。登录失败统一 401，不暴露账号是否存在。注销使该账号已签发 Token 全部失效；权限从数据库实时读取，不能从旧 Token 角色字段授权。
-
-更新请求不能缺已安装 release ID；未知或跨 pack 的 ID 返回 NOT_FOUND，无正式版返回 NO_PUBLISHED_RELEASE。本地已最新版返回 operations: []。客户端不向服务端上报执行进度，也不在重试期间刷新计划。
-
-文件下载支持 Range 是文件服务行为，不表示客户端采用分段并发；客户端使用文件级并发，不使用 Range 分段下载。上传请求为 multipart/form-data，字段 file，仅 JAR，上限 512 MiB；服务端流式计算 SHA-512。普通用户不需要管理员 JWT 下载整合包文件。
-
-## 3. 管理接口与权限映射
-
-下列路径均以 /api/v1/admin 为前缀。所有 ID 从 URL 取得，不通过 body 覆盖身份；PUT 表示完整替换所列配置，PATCH /mods 表示完整提交 ModInput 的可编辑字段，未提供可空平台 ID 即清空。
-
-| 方法 / 相对路径 | 请求 DTO | 成功响应 | 权限 |
-|---|---|---|---|
-| GET /packs | 分页 | 200 Page<Pack> | pack:read |
-| POST /packs | PackInput | 201 Pack | pack:write |
-| GET /packs/{id} | 无 | 200 Pack | pack:read |
-| PUT /packs/{id} | PackInput | 200 Pack | pack:write |
-| GET /mods | 分页、keyword | 200 Page<Mod> | mod:read |
-| POST /mods | ModInput | 201 Mod | mod:write |
-| PATCH /mods/{id} | ModInput | 200 Mod | mod:write |
-| GET /artifacts | 分页、mod_id | 200 Page<Artifact> | mod:read |
-| POST /artifacts | ArtifactInput | 201 Artifact | mod:write |
-| POST /files | multipart file | 201 HostedFile | file:write |
-| GET /packs/{id}/releases | 分页 | 200 Page<Release>，列表 items=[] | release:read |
-| GET /packs/{id}/releases/{release_id} | 无 | 200 Release 完整 items | release:read |
-| POST /packs/{id}/drafts | CreateDraftRequest | 201 Release | release:write |
-| PUT /packs/{id}/drafts/{release_id} | UpdateDraftRequest | 200 Release，新 revision | release:write |
-| POST /packs/{id}/drafts/{release_id}/preview | RevisionRequest | 200 UpdatePlan | release:read |
-| POST /packs/{id}/drafts/{release_id}/publish | RevisionRequest | 200 Release | release:publish |
-| GET /system/download-source-types | 无 | 200 SourceDictionaryItem[] | source:read |
-| PUT /system/download-source-types/{code} | name、enabled、sort_order | 200 SourceDictionaryItem | source:write |
-| GET /system/settings | 无 | 200 SystemSettings | settings:read |
-| PUT /system/settings | SystemSettings | 200 SystemSettings | settings:write |
-| GET /system/users | 分页 | 200 Page<Account> | user:read |
-| PATCH /system/users/{id} | UpdateAccountRequest | 200 Account | user:write |
-| GET /system/roles | 无 | 200 Role[] | permission:read |
-| GET /system/permissions | 无 | 200 Permission[] | permission:read |
-| PUT /system/roles/{code}/permissions | UpdateRolePermissionsRequest | 200 Role | permission:write |
-
-不提供新角色创建、用户密码重置、正式版编辑/删除接口。普通用户默认没有上表权限；超管初始拥有全部权限。系统用户、权限与注册设置管理仅 super_admin 可调用，不能仅通过给 user 增加同名管理权限绕过此角色边界。至少保留一名启用超管以及其系统管理权限；降低最后一个超管或破坏超管管理权限返回 CONFLICT。其余业务权限可通过 RBAC 配置给普通用户。
-
-CreateDraftRequest.base_release_id=null 时从当前正式版复制，无正式版则从空清单创建；指定值必须属于同包。更新草稿携带旧 revision，服务端原子比较并递增，不匹配返回 CONFLICT。items 是完整清单，删去条目在发布差异中产生 REMOVE。发布时间及快照由服务端写入，客户端不提交。Artifact 来源与哈希发布后保持不可变。
-
-## 4. Modrinth 接入接口
-
-前缀 /api/v1/admin/modrinth，全部要求 mod:read：
-
-- GET /search：query、minecraft_version、loader、offset（默认 0）、limit（默认 20、最大 100）。
-- GET /projects/{project_id}。
-- GET /projects/{project_id}/versions：minecraft_version、loader。
-- GET /versions/{version_id}。
-- POST /version-files：{"hashes":["sha512"],"algorithm":"sha512"}，最多 100 个哈希。
-
-第一版返回对应上游 JSON，不把它与自己的业务 Mod DTO 混用；由服务端限制参数、隐藏 API 凭据和映射上游异常。CurseForge/GitHub 暂仅录入实际文件来源，不开放完整元数据同步 API。
-
-## 5. 更新计划示例
-
-```json
-{
-  "pack_id": "11111111-1111-4111-8111-111111111111",
-  "pack_name": "Packy Demo",
-  "target_release_id": "22222222-2222-4222-8222-222222222222",
-  "target_version": "1.1.0",
-  "changelog": "更新示例",
-  "operations": [
-    {
-      "action": "REPLACE",
-      "mod_id": "33333333-3333-4333-8333-333333333333",
-      "old_path": "mods/demo-old.jar",
-      "target": {
-        "path": "mods/demo-new.jar",
-        "size": null,
-        "sha512": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "sources": [{"type":"github","url":"https://example.invalid/demo-new.jar","priority":0}]
-      }
-    }
-  ]
-}
-```
-
-示例仅说明结构，地址与哈希不可作为真实下载任务。ADD 必须有 target、不得有 old_path；REPLACE 两者都必须有；REMOVE 必须有 old_path、不得有 target。sources 至少一项，无可用来源返回 SOURCE_UNAVAILABLE。名单外路径不处理。
-
-## 6. Tauri 2 commands 与事件
-
-get_probe_info 返回 ProbeInfo 用于诊断；实际桌面通过以下 commands 调用 Rust 核心：
-
-| 方法 | 参数 | 返回/效果 |
+| 方法 | 路径 | 内容 |
 |---|---|---|
-| get_status | 无 | ClientSnapshot，包含 config/preferences/state/status/plan |
-| check_update | 无 | ClientSnapshot，包含检查结果；pack/server 来自已校验的本地配置 |
-| start_update | 无 | task_id；执行核心当前持有且展示的计划 |
-| retry_update | task_id | 同任务 task_id，不刷新计划 |
-| cancel_update | task_id | 仅检查/下载/校验阶段可取消 |
-| launch_game | 无 | 仅调用已校验的 launcher_path |
-| set_background_enabled | enabled: boolean | 原子保存当前整合包的后台运行偏好，返回最新 ClientSnapshot；保存失败不改变原行为 |
+| GET/POST | /packs | 分页列表 / name,minecraft_version,loader |
+| GET/PUT | /packs/:pack | 详情 / 同创建字段 |
+| GET/POST | /mods | keyword 分页 / modid,name,modrinth_project_id,curseforge_project_id |
+| PATCH | /mods/:id | 完整提交 Mod 可编辑字段，可空平台 ID 清空关联 |
+| GET/POST | /artifacts | mod_id 分页 / mod_id,version,filename,size,sha512,hosted_file_id,sources |
+| POST | /files | multipart 的 file，JAR 上限 512 MiB；响应 id,filename,size,sha512,url |
+| GET | /packs/:pack/releases | 分页发布列表，包含 items |
+| GET | /packs/:pack/releases/:id | 完整快照 |
+| GET | /packs/:pack/releases/:id/diff | 与该快照冻结前序版本比较的差异 |
+| POST | /packs/:pack/drafts | version,changelog,base_release_id（可空，默认当前正式版） |
+| PUT | /packs/:pack/drafts/:id | revision,version,changelog,items；item 为 mod_id,artifact_id,target_path |
+| POST | /packs/:pack/drafts/:id/preview | revision，返回三类差异 |
+| POST | /packs/:pack/drafts/:id/publish | revision，返回冻结快照 |
+| GET | /system/download-source-types | 固定 modrinth/curseforge/github/server |
+| PUT | /system/download-source-types/:code | name,enabled,sort_order |
+| GET | /audit-logs | 分页；pack_id/action/result/resource_id/from/to 筛选，result=success/failed |
+| GET | /audit-logs/:id | 字段 old/new、主体、时间、资源、request_id、结果 |
 
-事件 packy:update-status 使用 TaskStatus：sequence 在同一核心实例内单调递增，允许合并中间事件；普通进度最多 10 次/秒，终态立即发。阶段固定 idle/checking/available/ready/downloading/verifying/installing/saving_state/completed/failed/cancelled；不以事件到达证明业务已完成，get_status 为权威快照。前端不传文件路径、URL 或任意操作列表控制核心。
+Modrinth：GET `/modrinth/search`，GET `/modrinth/projects/:id`，GET `/modrinth/projects/:id/versions`，GET `/modrinth/versions/:id`，POST `/modrinth/version-files`。返回上游 JSON；搜索支持 query/offset/limit/facets；版本支持 game_versions/loaders 的 JSON 数组字符串；哈希请求 `{hashes,algorithm:"sha512"}`，最多 100 个。CurseForge/GitHub 只录入实际下载 URL，不增加平台全量同步。
 
-## HTTP/HTTPS 部署与联调补充（2026-10-15）
+来源 `{type,url,priority}`。计划 `{pack_id,pack_name,target_release_id,target_version,changelog,operations}`。每个操作 `{action,mod_id,old_path?,target?}`：ADD 仅 target、REPLACE 两者、REMOVE 仅 old_path。target `{path,size,sha512,sources}`，size 可 null；SHA-512 为 128 位小写十六进制。path 必须是 mods/ 下 JAR，相对路径统一 `/`。不同文件不能有大小写/Unicode 归一化别名或父子冲突。名单外文件不扫描、不删除。空差异保留客户端已安装版本 ID；未知/跨包版本拒绝。预览和发布检查所有历史正式版本的直接升级路径，大小写/Unicode 别名改名冲突会提前拒绝；客户端计划接口同样执行协议校验。
 
-用户确认客户端支持 HTTP/HTTPS 服务地址和下载链接。Rust 服务端只监听 HTTP，不配置 TLS；自部署由 Nginx 终止 HTTPS 并转发 HTTP。PACKY_PUBLIC_URL 使用客户端实际可访问的 HTTP/HTTPS 外部地址，不能使用内部反代地址生成下载链接。本地联调用 HTTP。HTTPS 链接的重定向不允许降级为 HTTP；初始 HTTP 链接可正常使用。完成客户端和服务端后执行实际联调，检查计划、下载、校验、安装、失败重试与版本落盘，不能仅以单元测试代替。
+## JAR 安装命名
+
+后台 Mod 的 `name` 是显示名称；管理员填写中文名后，草稿保存时冻结为 `name_snapshot`。安装文件名由服务端统一生成为 `[name_snapshot]Artifact.filename`，例如 `mods/[钠]sodium-fabric.jar`。原始文件名、下载 URL 和哈希保持不变；`target_path` 仍需为合法 mods/ 下 JAR 路径，其目录保留，文件名由服务端覆盖。后台保存后显示响应中的最终路径。
+
+名称先做 NFC 归一化、去除首尾空白，控制字符及 `\ / : < > " | ? * [ ]` 替换为 `_`；不自动翻译名称。文件名超过 255 个 UTF-8 字节或 UTF-16 码元时拒绝，避免截断造成混淆。最终路径按大小写不敏感及 Unicode 归一化检查重复和父子冲突。重复保存始终从原始 Artifact.filename 生成，不叠加前缀。
+
+从既有发布创建草稿时沿用名称快照；保存草稿时刷新为后台当前名称。预览与发布使用相同格式化规则，兼容修改前创建的草稿。已发布快照和已有客户端任务不改写；下一次发布的路径变化产生 REPLACE，只删除清单记录的旧路径，不扫描玩家其他 JAR。
+
+## Electron / Sidecar
+
+stdio JSON-RPC 2.0，Content-Length framing，消息最大 8 MiB，header 最大 4 KiB；stdout 仅协议，stderr 诊断。Go sourcegraph/jsonrpc2 与 TS vscode-jsonrpc 负责消息关联。
+
+1. Sidecar 通知 hello：protocol_version=1，version，os，arch。
+2. Main 请求 initialize：`{pack_root:绝对路径,protocol_version:1}`，返回 Snapshot。
+3. get_status、check_update 无参数；start_update 无参数，返回 task_id。
+4. retry_update、cancel_update：`{task_id}`，检查期间 task_id 为空；set_background_enabled：`{enabled}`；launch_game 无参数；shutdown 无参数。
+
+Snapshot 包含 config/preferences/state/status/plan/can_launch。status 包含 instance_id/task_id/sequence/phase/completed_files/total_files/downloaded_bytes/total_bytes/bytes_per_second/error。Electron 每 250ms 取快照并发给渲染页；instance_id 与 sequence 防止旧状态覆盖。Main 仅开放固定命令，校验发送者；隔离 context、sandbox、禁止页面 Node、导航和新窗口。
+
+状态：idle → checking → available/ready/failed；available → downloading → verifying → installing → saving_state → completed；下载和校验可取消；安装保存不可取消。失败/取消保留原计划，retry 不访问最新计划。先全部下载校验，再应用名单，最后原子保存 state；只读 state 已等于目标而完成标记未写时恢复完成，不重装。Main 退出先 shutdown 再关 stdin；意外断管时 Go 取消下载或等安装完成后释放文件锁。
+
+本地 `.updater/state.json` 为 `{installed_release_id}`；preferences 为 `{background_enabled}`；task 为 `{schema_version:2,task_id,installed_release_id,plan,phase}`，兼容旧 schema 1。不存在有效版本记录时拒绝猜测。没有协议生成器。
+
+## 下载设置 RPC 补充
+
+`set_download_settings` 请求体为可选字段：max_concurrent_downloads、check_timeout_seconds、download_timeout_seconds、max_attempts、speed_limit_kib及proxies映射（modrinth/curseforge/github/server）。空对象恢复默认，显式空代理强制直连。保存整个覆盖对象，缺失字段继承内嵌默认；返回Snapshot。Snapshot新增download和download_defaults，preferences新增download覆盖。活动任务保持启动时设置，重试仍使用原计划。字段含义和边界见CONFIG.md及下载设置方案。

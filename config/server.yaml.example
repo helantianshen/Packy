@@ -1,11 +1,7 @@
-# 各字段可由对应 PACKY_* 环境变量覆盖，log_filter 对应 RUST_LOG
-listen: '127.0.0.1:8080'
-public_url: 'http://127.0.0.1:8080'
-database: 'data/packy.db'
-files_dir: 'data/files'
-# 发布包后台在 admin，源码运行时使用 web/admin/dist
-admin_dir: 'admin'
-# 必须填写至少 32 字节的随机密钥
+listen: 127.0.0.1:8080
+database: data/packy-go.db
+files_dir: data/files
+public_url: http://127.0.0.1:8080
 jwt_secret: ''
-modrinth_user_agent: 'Packy/0.1.0'
-log_filter: 'packy_server=info,tower_http=info'
+modrinth_user_agent: Packy/0.2 (set-your-contact)
+log_filter: info
