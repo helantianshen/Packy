@@ -13,3 +13,7 @@
 首轮 39106983930：Go race/vet、构建/烟测、品牌与浏览器通过；Electron 因运行时未下载（ENOENT）失败。Electron npm 包现提供 install-electron CLI，加入 electron:install 命令并由 verify 显式调用，避免依赖已不存在的自动安装行为。
 
 第二轮 39107474036：verify（含 Xvfb Electron）及 Linux 双架构、服务端/后台已通过。Windows x64 核心测试通过，打包入口因将盘符绝对路径直接传给 ESM import 而失败；改用 pathToFileURL 转换，兼容 Windows 路径。
+
+## 最终结果
+
+完成：代码提交 382e766，远端运行 https://github.com/helantianshen/Packy/actions/runs/39107967836 全部 8 个 job 成功，8 份产物均已下载并核验。六客户端主程序/Sidecar 架构、Unix 执行权限、macOS 符号链接、app.asar 和服务端/后台必要文件正确；下载的 Linux x64 包已实际启动、连接 Sidecar 并保存设置。证据为 docs/evidence/ci-2026-10-18.json。首次运行时安装问题和 Windows ESM 路径问题均已修复并由此轮覆盖。最终仅补充验证文档，使用 [skip ci] 避免重复相同代码构建。Windows/macOS 原生 GUI 与真实来源验收不在此次 CI 产物确认范围。

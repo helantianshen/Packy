@@ -110,4 +110,4 @@ Linux 首次安装：在服务端分发目录执行 `sudo bash deploy.sh`，交�
 
 共八个独立构建产物。完整目录先生成 tar.gz，再上传 GitHub Artifact，以保留 Unix 可执行权限和符号链接；下载后需解开 Artifact 外层 ZIP，再解开 tar.gz。客户端包仍须按照上面的整合包目录约定放置，构建成功不代表真实来源、托盘、通知和游戏启动器已完成跨平台验收。
 
-本地运行后台回归：根目录 `npm ci`，安装后台依赖后执行 `npx --no-install playwright install --no-shell chromium`、`npm run test:browser`。测试自动启动并停止 127.0.0.1:5187 的独立 Vite 服务，使用模拟 API 控制响应顺序，不访问真实业务库。Linux CI 通过 Xvfb 执行原生 Electron 测试；失败时保留测试诊断产物。远端执行仍需提交/推送，本轮未执行。
+本地运行后台回归：根目录 `npm ci`，安装后台依赖后执行 `npx --no-install playwright install --no-shell chromium`、`npm run test:browser`。测试自动启动并停止 127.0.0.1:5187 的独立 Vite 服务，使用模拟 API 控制响应顺序，不访问真实业务库。Linux CI 通过 Xvfb 执行原生 Electron 测试；失败时保留测试诊断产物。已完成一次六平台远端运行及八份下载产物核验，链接与范围见 [验证记录](docs/VERIFICATION-go-electron.md)。

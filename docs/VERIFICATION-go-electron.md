@@ -104,3 +104,11 @@ Linux Electron 开发入口及最终便携包均实际启动（不是浏览器�
 本机通过 actionlint 1.7.12、根 npm ci、npm audit（0）、Go race/vet、CGO_ENABLED=0 客户端测试、全前端构建、格式、品牌测试、烟测、两个 Electron 原生测试及 `npm run test:browser`（1 项）。Linux x64 桌面/服务端重打包通过，三类 tar.gz 检查确认客户端主程序/Sidecar 和服务端可执行权限，以及 SQL、部署脚本、service、admin index.html 均存在。`git diff --check` 通过。
 
 本机使用 CachyOS 图形会话验证 Electron，没有安装/执行 Xvfb；CI 中的 Ubuntu 系统依赖和 Xvfb 启动，以及其余五个原生平台的实际运行结果，须由远端工作流确认。未触发远端 CI，未提交、推送。此前手动 Playwright CLI 夹具现由标准 `npm run test:browser` 入口调用。
+
+## GitHub CI 与下载产物验收（2026-10-18）
+
+代码提交 `382e7665b2aef0ae2a12cec35bc665642e3a3456` 的 [GitHub Actions 运行](https://github.com/helantianshen/Packy/actions/runs/39107967836) 已全部成功（8 个 job）。此前两轮暴露的 Electron 运行时未显式下载、Windows ESM import 直接使用盘符路径的问题均已修复。最终 CI 包含完整 verify、六个平台的原生客户端核心/品牌测试与打包，以及 Linux x64 服务端和独立后台构建。
+
+八份 Artifact 全部实际下载，核对 ELF/PE/Mach-O 的架构、主程序和 Sidecar 配对、Unix 可执行权限、macOS bundle 符号链接、app.asar、初始化 SQL/配置样例/部署脚本/service、独立后台 index.html 和 JS 文件。下载的 Linux x64 便携包还在中文和空格临时路径中实际启动、连接内嵌 Sidecar 并保存下载设置，未接触真实玩家目录。详细大小、摘要和逐项记录见 [CI 证据](evidence/ci-2026-10-18.json)。
+
+六种客户端为 linux/win32/darwin 各 x64/arm64，另有 packy-server-linux-x64 与 packy-admin。产物均为 tar.gz，再包在 GitHub Artifact ZIP 中；需依次解开 ZIP 和 tar.gz。此轮已验证真实远端 Ubuntu Xvfb 测试，覆盖前文待验项；Windows/macOS 的原生 GUI、托盘、通知、启动器与真实下载来源仍须单独验收。最终文档记录提交使用 [skip ci]，未修改已通过验证的应用或工作流代码。

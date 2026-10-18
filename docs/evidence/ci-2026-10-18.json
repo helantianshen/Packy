@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-18",
+  "commit": "382e7665b2aef0ae2a12cec35bc665642e3a3456",
+  "run_id": 39107967836,
+  "run_url": "https://github.com/helantianshen/Packy/actions/runs/39107967836",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "verify",
+      "conclusion": "success"
+    },
+    {
+      "name": "server-admin",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (macos-15, darwin, arm64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (ubuntu-24.04, linux, x64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (windows-11-arm, win32, arm64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (windows-2022, win32, x64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (ubuntu-24.04-arm, linux, arm64)",
+      "conclusion": "success"
+    },
+    {
+      "name": "portable (macos-15-intel, darwin, x64)",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "Packy-linux-x64",
+      "size_in_bytes": 139697361,
+      "digest": "sha256:8f3da82ef945bc511e26555152bf4b06d28eb911d789d1b1f753e7f034b74199",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-linux-x64",
+        "archive_bytes": 139697203,
+        "entries": 80,
+        "checked": true
+      }
+    },
+    {
+      "name": "Packy-linux-arm64",
+      "size_in_bytes": 140118031,
+      "digest": "sha256:3e51bd44fcc37442a04f10a58d0cef98b54eb4ab7ecd68e7cfa851edf6197f07",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-linux-arm64",
+        "archive_bytes": 140117869,
+        "entries": 80,
+        "checked": true
+      }
+    },
+    {
+      "name": "packy-admin",
+      "size_in_bytes": 1044134,
+      "digest": "sha256:ac9465776cf41de3d290d0ad7f0505c0ffa7c0bf297b5a3ee64447cf37519c1f",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "packy-admin",
+        "archive_bytes": 1043984,
+        "entries": 50,
+        "checked": true
+      }
+    },
+    {
+      "name": "Packy-win32-arm64",
+      "size_in_bytes": 172595110,
+      "digest": "sha256:36e380f6781ac6bd221f67465ff513bf992979c4ce1d402f358a3c6f5c9e345d",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-win32-arm64",
+        "archive_bytes": 172594948,
+        "entries": 81,
+        "checked": true
+      }
+    },
+    {
+      "name": "Packy-darwin-x64",
+      "size_in_bytes": 152433141,
+      "digest": "sha256:4471149e003d1654d1d9e1ac74ff2723deb315e4552bf5d22bfa695a473cdec6",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-darwin-x64",
+        "archive_bytes": 152432981,
+        "entries": 592,
+        "checked": true
+      }
+    },
+    {
+      "name": "packy-server-linux-x64",
+      "size_in_bytes": 20967216,
+      "digest": "sha256:32b8e9e3381b575d4d3f2e22275a23009deef3fbf46b4a9df359c1ae530cfb81",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "packy-server-linux-x64",
+        "archive_bytes": 20967044,
+        "entries": 11,
+        "checked": true
+      }
+    },
+    {
+      "name": "Packy-darwin-arm64",
+      "size_in_bytes": 146285105,
+      "digest": "sha256:cd1ad13a6bd3bec8e00b1fcf55139227d6bbc496571705d1d7a70488f17231ac",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-darwin-arm64",
+        "archive_bytes": 146284941,
+        "entries": 592,
+        "checked": true
+      }
+    },
+    {
+      "name": "Packy-win32-x64",
+      "size_in_bytes": 175244930,
+      "digest": "sha256:2bbab4a08eca4050f94fbe75fe9fa77721045d1fb57eed5bd101a5c6bfcb739f",
+      "expired": false,
+      "archive_validation": {
+        "artifact": "Packy-win32-x64",
+        "archive_bytes": 175244772,
+        "entries": 81,
+        "checked": true
+      }
+    }
+  ],
+  "download_validation": "All eight artifacts downloaded; tar contents, executable architecture (ELF/PE/Mach-O), Unix executable modes, macOS symlinks, app.asar, Sidecar and required server/admin files verified",
+  "linux_portable_runtime": "Downloaded CI linux-x64 artifact launched in a temporary Chinese/space path; packaged flag, embedded Sidecar and persisted download preferences verified",
+  "limits": "Windows/macOS native GUI, tray, notifications and game launcher acceptance remain separate from successful native core tests and packaging"
+}
